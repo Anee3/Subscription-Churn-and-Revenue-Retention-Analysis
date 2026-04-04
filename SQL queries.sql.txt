@@ -1,0 +1,20 @@
+-- Customer churn count
+SELECT status, COUNT(*) AS total_customers
+FROM customers
+GROUP BY status;
+
+-- Churn by subscription plan
+SELECT subscription_plan, COUNT(*) AS churned_customers
+FROM customers
+WHERE status = 'Churned'
+GROUP BY subscription_plan;
+
+-- Revenue by subscription plan
+SELECT subscription_plan, SUM(monthly_subscription_fee) AS total_revenue
+FROM customers
+GROUP BY subscription_plan;
+
+-- Revenue lost due to churn
+SELECT subscription_plan, SUM(revenue_lost) AS revenue_lost
+FROM customers
+GROUP BY subscription_plan;
